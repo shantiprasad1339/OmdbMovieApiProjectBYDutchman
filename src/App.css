@@ -1,0 +1,29 @@
+body{
+    background: #555555;
+   scroll-behavior: smooth;
+}
+.movieapp > .row{
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
+.movieli{
+    position: relative;
+transition: transform 0.2s;
+}
+.movieli:hover{
+cursor: pointer;
+transform: scale(1.1);
+}
+.movieli:hover .overlay{
+    opacity: 1;
+}
+.overlay {
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    width: 100%;
+    opacity: 0;
+    bottom: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
