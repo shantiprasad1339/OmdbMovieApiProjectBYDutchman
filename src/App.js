@@ -56,7 +56,7 @@ function App() {
       <div className=' h-auto w-auto'>
         <div className='flex space-x-8 md:space-x-80 '>
           <div className='  mt-2 bg-black rounded-lg '>
-            <h1 className='text-xl font-bold rounded-lg px-2 sm:text-3xl text-white border border-white'>Dutchman-Movies App</h1>
+            <h1 className='text-xl font-bold rounded-lg px-2 sm:text-3xl text-white border border-white'>Dutchman-Movies</h1>
           </div>
           <div className=' mt-2  '>
             <input type='text' className='pl-2 w-40 rounded border-2 border-black ' value={search} onChange={(event) => setsearch(event.target.value)} placeholder='search movies..' ></input>
