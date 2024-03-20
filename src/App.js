@@ -7,9 +7,7 @@ function App() {
   const [movies, setMovie] = useState([]);
   const [favouritMovies, setfavouritemovies] = useState([]);
   const [search, setsearch] = useState('');
-  
-
-
+ ;
   //displaying movie from api
   const getMoviesrequest = async (search) => {
     const url = `https://www.omdbapi.com/?s=${search}&apikey=865d26de`;
@@ -24,38 +22,35 @@ function App() {
   };
   useEffect(() => {
     getMoviesrequest(search);
+    const FavMovies = JSON.parse(localStorage.getItem('favourites')) || [];
+    setfavouritemovies(FavMovies);
   }, [search]);
-
-  //setting movie to localstorage
-
+  
 
 
+
+
+  console.log(favouritMovies)
 
 
 
   const addfavourites = (movie) => {
-    let newFavouritelist = [...favouritMovies, movie];
-    setfavouritemovies(newFavouritelist);
-    // saveTolocal(newFavouritelist)
-    
+    setfavouritemovies(prevFavourites => {
+      const newFavouritelist = [...prevFavourites, movie];
+      localStorage.setItem('favourites', JSON.stringify(newFavouritelist));
+      return newFavouritelist;
+    });
   };
-
+  
   const removefavourites = (movies) => {
     const removedfavourites = favouritMovies.filter((item) => item.imdbID !== movies.imdbID);
     setfavouritemovies(removedfavourites);
-    // localStorage.clear('movieApp');
-    // saveTolocal(removedfavourites);
+    localStorage.setItem('favourites', JSON.stringify(removedfavourites));
   };
+  
 
-
-  // const saveTolocal = (moviename) => {
-  //   localStorage.setItem("movieApp", JSON.stringify(moviename));
-  // }
-  // useEffect(() => {
-  //   const getFavouritemovies = JSON.parse(localStorage.getItem('movieApp'));
-  //   setfavouritemovies(getFavouritemovies);
-    
-  // }, [search]);
+  
+  
   return (
     <>
       <div className=' h-auto w-auto'>
@@ -67,7 +62,6 @@ function App() {
             <input type='text' className='pl-2 w-40 rounded border-2 border-black ' value={search} onChange={(event) => setsearch(event.target.value)} placeholder='search movies..' ></input>
           </div>
         </div>
-        {/* <div className='max-w-screen grid grid-rows-6 grid-flow-col justify-center gap-2 sm:flex sm:space-x-2 movie-app'> */}
         <div className=' py-5 mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5  md:gap-x-5 xmd:grid-cols-5 gap-x-3 movie-app'>
           {movies.map((movie, index) => {
             return (
